@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class NavBarService {
   constructor() {}
-  isOpened: boolean = false;
+  isOpened: boolean = true;
 
   toggleOpen(): any {
     this.isOpened = !this.isOpened;

@@ -1,0 +1,37 @@
+<app-loader *ngIf="loading"></app-loader>
+<mat-list>
+  <mat-list-item *ngIf="!leavesToApprove.length; else elseBlock">
+    <p matLine>
+      <span>No leaves to approve</span>
+    </p>
+  </mat-list-item>
+  <mat-divider *ngIf="!leavesToApprove.length"></mat-divider>
+
+  <ng-template #elseBlock>
+    <mat-list-item *ngFor="let leave of leavesToApprove">
+      <img
+        matListAvatar
+        class="avatar mat-elevation-z8"
+        [src]="baseUrl + leave.appliedBy.avatar"
+        alt=""
+      />
+
+      <h3 matLine>
+        {{ leave.appliedBy.firstname + " " + leave.appliedBy.lastname }}
+      </h3>
+      <p matLine>
+        <span>Leave from: {{ leave.leaveStart }}</span>
+      </p>
+      <p matLine>
+        <span> Leave till: {{ leave.leaveEnd }}</span>
+      </p>
+      <button mat-button class="btn-small">
+        <mat-icon matRipple matListIcon class="cross icon">close</mat-icon>
+      </button>
+      <button mat-button class="btn-small">
+        <mat-icon matRipple matListIcon class="tick icon">done</mat-icon>
+      </button>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </ng-template>
+</mat-list>

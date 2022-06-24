@@ -1,0 +1,86 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { LeavesService } from '../leaves.service';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import * as moment from 'moment';
+import { LoginService } from 'src/app/login/auth.service';
+@Component({
+  selector: 'app-apply-leave',
+  templateUrl: './apply.component.html',
+  styleUrls: ['./apply.component.css'],
+  providers: [LeavesService],
+})
+export class ApplyComponent implements OnInit {
+  constructor(
+    private leavesService: LeavesService,
+    private loginService: LoginService
+  ) {}
+  managers: any = [];
+  selected: '';
+  selectedManagers: Array<{ name: string; id: string }> = [];
+  startDate: any;
+  endDate: any;
+  message: string = '';
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  ngOnInit(): void {
+    if (!this.managers.length) {
+      this.leavesService
+        .getAllManagers()
+        .then((res: any) => {
+          this.managers = res.data;
+          console.log(this.managers);
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    }
+  }
+  pushManager(event: any) {
+    if (event.value) {
+      let index = this.selectedManagers.findIndex(
+        (el) => el.id === event.value._id
+      );
+      if (index === -1) {
+        // let manager = this.managers.filter((el: any) => el._id === event.value);
+        this.selectedManagers.push({
+          id: event.value._id,
+          name: event.value.firstname + ' ' + event.value.lastname,
+        });
+        console.log(this.selectedManagers);
+      }
+    }
+    console.log(moment(this.startDate).format('DD-MM-YYYY'));
+    console.log(moment(this.endDate).format('DD-MM-YYYY'));
+  }
+  remove(manager: { name: string; id: string }): void {
+    const index = this.selectedManagers.findIndex(
+      (ele: { name: string; id: string }) => ele.id === manager.id
+    );
+
+    if (index >= 0) {
+      this.selectedManagers.splice(index, 1);
+    }
+  }
+  applyLeave(): void {
+    let user = this.loginService.getUser();
+    let managerIds = this.selectedManagers.map((el) => el.id);
+    let data = {
+      userid: user.id,
+      managerids: managerIds,
+      startdate: moment(this.startDate).format('DD-MM-YYYY'),
+      enddate: moment(this.endDate).format('DD-MM-YYYY'),
+    };
+    this.leavesService
+      .ApplyLeaves(data)
+      .then((res: any) => {
+        console.log(res);
+        this.message = res.message
+      })
+      .catch((err: any) => {
+        console.log(err);
+        this.message = 'Something went wrong please try again later.'
+      });
+  }
+  emptyMessages(event: string): void {
+    this.message = event;
+  }
+}

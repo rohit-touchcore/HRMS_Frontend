@@ -1,0 +1,66 @@
+<div class="optionContent">
+  <app-snackbar
+    *ngIf="message !== ''"
+    [action]="''"
+    [error]="message"
+    (messageEmit)="emptyMessages($event)"
+  ></app-snackbar>
+  <div class="ApplyContainer">
+    <div class="managerOptions">
+      <div class="managerField">
+        <mat-form-field appearance="fill">
+          <mat-label>Choose managers</mat-label>
+          <mat-select
+            [(value)]="selected"
+            (selectionChange)="pushManager($event)"
+          >
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let manager of managers" [value]="manager">
+              {{ manager.firstname + " " + manager.lastname }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="chips">
+        <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-label>Selected Managers</mat-label>
+          <mat-chip-list #chipList aria-label="Fruit selection">
+            <mat-chip
+              *ngFor="let manager of selectedManagers"
+              (removed)="remove(manager)"
+            >
+              {{ manager.name }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="dateOptions">
+      <mat-form-field appearance="fill">
+        <mat-label>Choose start date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="startDate" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose end date</mat-label>
+        <input matInput [matDatepicker]="picker1" [(ngModel)]="endDate" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="button-row">
+    <button mat-raised-button (click)="applyLeave()" color="primary">
+      Apply
+    </button>
+  </div>
+</div>

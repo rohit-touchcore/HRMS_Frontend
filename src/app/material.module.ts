@@ -12,20 +12,32 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatListModule } from '@angular/material/list';
 
 const modules = [
   MatCardModule,
+  MatNativeDateModule,
   MatToolbarModule,
+  MatChipsModule,
+  MatSelectModule,
   MatInputModule,
   MatButtonModule,
   NgxMatFileInputModule,
+  MatListModule,
   MatFormFieldModule,
   MatDividerModule,
+  MatTabsModule,
   MatOptionModule,
   MatProgressSpinnerModule,
   MatSnackBarModule,
   MatIconModule,
   MatSidenavModule,
+  MatDatepickerModule,
 ];
 
 @NgModule({

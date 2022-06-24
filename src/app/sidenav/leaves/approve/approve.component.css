@@ -1,0 +1,27 @@
+.listItemContainer{
+  display: flex;
+  width: 100%;
+}
+
+.cross {
+  color: red;
+}
+
+.tick {
+  color: greenyellow;
+}
+
+.icon {
+  padding-right:10px !important;
+  padding-left:10px !important;
+}
+
+.avatar{
+  border-radius: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.btn-small{
+  /* width: ; */
+}

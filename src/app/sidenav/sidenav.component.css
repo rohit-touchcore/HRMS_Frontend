@@ -3,13 +3,8 @@
   border-radius: 10px;
   margin: 16px;
   margin-left: 32px;
-
   display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 2rem;
-  color: lightgray;
+  flex-direction: column;
 }
 
 mat-sidenav {
@@ -50,4 +45,53 @@ mat-divider {
   margin-top: 16px;
   margin-bottom: 16px;
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+.sideNavContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.sideNavOptionContainer {
+  display: flex;
+  cursor: pointer;
+  border-radius: 35px;
+  background-color: white;
+  align-items: center;
+  margin: 10px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 11px;
+  height: 2.25rem;
+  justify-content: flex-start;
+  width: 93%;
+  overflow: none;
+  margin-left: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.activeoption {
+  background-color: black;
+}
+
+.sideNavOption {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0;
+  font-size: large;
+  color: black;
+  text-align: center;
+  font-weight: 500;
+  margin-left: .30rem;
+}
+
+
+mat-icon {
+  color: black;
+  margin-left: 1px;
+  margin-right: 2px;
 }

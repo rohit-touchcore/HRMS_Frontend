@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="side" [opened]="navBar.isOpened">
+  <mat-sidenav style="overflow: hidden" mode="side" [opened]="navBar.isOpened">
     <img
       height="150"
       width="150"
@@ -15,9 +15,15 @@
     <p class="designation">{{ loginService.userData.designation }}</p>
 
     <mat-divider></mat-divider>
-    <a [routerLink]="['./dashboard']">Dashboard</a>
-    <a [routerLink]="['./leaves']">Leave</a>
-    <a [routerLink]="['./attendance']">Attendance</a>
+    <div
+      class="sideNavContainer"
+      *ngFor="let option of sideNavOptionsService.getOptions()"
+    >
+      <div [routerLink]="[option.path]" class="sideNavOptionContainer">
+        <mat-icon>{{ option.icon }}</mat-icon>
+        <p class="sideNavOption">{{ option.name }}</p>
+      </div>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">

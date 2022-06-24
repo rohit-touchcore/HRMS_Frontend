@@ -10,6 +10,8 @@ import { AttendanceComponent } from './sidenav/attendance/attendance.component';
 
 import { AuthGuard } from './helper/auth.gaurd';
 import { LoginGuard } from './helper/login.gaurd';
+import { ApplyComponent } from './sidenav/leaves/apply/apply.component';
+import { ApproveComponent } from './sidenav/leaves/approve/approve.component';
 
 const routes: Routes = [
   {
@@ -18,7 +20,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardComponent },
-      { path: 'leaves', component: LeavesComponent },
+      {
+        path: 'leaves',
+        component: LeavesComponent,
+        children: [
+          { path: '', component: ApplyComponent },
+          { path: 'approve', component: ApproveComponent },
+        ],
+      },
       { path: 'attendance', component: AttendanceComponent },
     ],
   },
