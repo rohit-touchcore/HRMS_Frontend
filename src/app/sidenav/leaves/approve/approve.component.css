@@ -1,4 +1,4 @@
-.listItemContainer{
+.listItemContainer {
   display: flex;
   width: 100%;
 }
@@ -12,16 +12,12 @@
 }
 
 .icon {
-  padding-right:10px !important;
-  padding-left:10px !important;
+  padding-right: 10px !important;
+  padding-left: 10px !important;
 }
 
-.avatar{
+.avatar {
   border-radius: 50px;
   margin-left: 20px;
   margin-right: 20px;
-}
-
-.btn-small{
-  /* width: ; */
 }
