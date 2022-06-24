@@ -1,0 +1,27 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" [opened]="navBar.isOpened">
+    <img
+      height="150"
+      width="150"
+      class="avatar mat-elevation-z8"
+      [src]="imageUrl"
+      alt="user"
+    />
+    <h4 class="name">
+      {{
+        loginService.userData.firstname + " " + loginService.userData.lastname
+      }}
+    </h4>
+    <p class="designation">{{ loginService.userData.designation }}</p>
+
+    <mat-divider></mat-divider>
+    <a [routerLink]="['./dashboard']">Dashboard</a>
+    <a [routerLink]="['./leaves']">Leave</a>
+    <a [routerLink]="['./attendance']">Attendance</a>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

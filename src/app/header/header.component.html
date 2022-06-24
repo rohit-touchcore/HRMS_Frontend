@@ -1,0 +1,26 @@
+<mat-toolbar>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    (click)="onToggle()"
+    *ngIf="!navBar.isOpened"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    (click)="onToggle()"
+    *ngIf="navBar.isOpened"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+  <span>HRMS</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="Logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+

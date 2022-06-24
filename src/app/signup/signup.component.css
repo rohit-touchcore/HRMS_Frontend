@@ -1,0 +1,70 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2eded;
+}
+
+.my-card {
+  height: 90%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+}
+
+.login-button {
+  margin: 0;
+}
+
+.my-form {
+  min-width: 50%;
+  max-height: 50%;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-error .ng-tns-c82-3 .ng-star-inserted {
+  margin: 2px;
+}
+
+#fileUpload {
+  position: absolute;
+  z-index: 9;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  cursor: pointer;
+}
+
+.myform-wrapper {
+  margin: 50px;
+  width: 350px;
+}
+
+.mat-toolbar-single-row {
+  height: auto !important;
+  background: transparent;
+
+}
+
+/* button {
+  width: 30%;
+} */
+
+.mat-form-field {
+  width: 100%;
+}

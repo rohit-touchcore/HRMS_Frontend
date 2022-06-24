@@ -1,0 +1,139 @@
+<div class="container">
+  <app-loader *ngIf="loading == true"></app-loader>
+  <app-snackbar
+    *ngIf="error !== '' || success !== ''"
+    [action]="'close'"
+    [error]="error !== '' ? error : success"
+    (messageEmit)="emptyMessages($event)"
+  ></app-snackbar>
+  <mat-card class="my-card">
+    <mat-card-title class="title">Sign up</mat-card-title>
+    <mat-card-content>
+      <form class="my-form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="full-width">
+          <ngx-mat-file-input
+            formControlName="avatar"
+            accept=".png, .jpg, .jpeg"
+          >
+          </ngx-mat-file-input>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>First Name</mat-label>
+          <input
+            type="text"
+            formControlName="firstname"
+            matInput
+            placeholder="Rohan"
+          />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Last Name</mat-label>
+          <input
+            type="text"
+            formControlName="lastname"
+            matInput
+            placeholder="Roy"
+          />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Designation</mat-label>
+          <input
+            type="text"
+            formControlName="designation"
+            matInput
+            placeholder="Roy"
+          />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            formControlName="email"
+            matInput
+            placeholder="Ex. pat@example.com"
+          />
+          <mat-error
+            *ngIf="
+              signUpForm.controls.email.touched == true &&
+              signUpForm.controls.email.status == 'INVALID'
+            "
+            >please enter a valid email.</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Phone</mat-label>
+          <input
+            type="text"
+            formControlName="phone"
+            matInput
+            placeholder="9876543210"
+          />
+          <mat-error
+            *ngIf="
+              signUpForm.controls.phone.touched == true &&
+              signUpForm.controls.phone.status == 'INVALID'
+            "
+            >please enter a valid phone number.</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Roles</mat-label>
+          <select matNativeControl required formControlName="role">
+            <option *ngFor="let role of roles" [value]="role.value">
+              {{ role.name }}
+            </option>
+          </select>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+            name="password"
+          />
+          <mat-error
+            *ngIf="
+              signUpForm.controls.password.touched == true &&
+              signUpForm.controls.password.status == 'INVALID'
+            "
+            >please enter a valid password.</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Confirm Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="cpassword"
+            placeholder="Confirm Password"
+            name="password"
+          />
+          <mat-error
+            *ngIf="
+              signUpForm.controls.cpassword.touched == true &&
+              signUpForm.value.cpassword !== signUpForm.value.password
+            "
+            >password mismatch</mat-error
+          >
+        </mat-form-field>
+        <p style="font-size: small">
+          Already have an account ? <a routerLink="/login">Log In</a>
+        </p>
+        <mat-card-actions class="login-button">
+          <button
+            [disabled]="
+              signUpForm.status === 'INVALID' ||
+              signUpForm.value.cpassword !== signUpForm.value.password
+            "
+            mat-raised-button
+            color="primary"
+          >
+            SIGN UP
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
