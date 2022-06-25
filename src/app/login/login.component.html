@@ -2,7 +2,7 @@
   <app-loader *ngIf="loading == true"></app-loader>
   <app-snackbar
     *ngIf="message !== ''"
-    [action]="''"
+    [action]="'close'"
     [error]="message"
     (messageEmit)="emptyMessages($event)"
   ></app-snackbar>

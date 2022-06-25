@@ -10,12 +10,15 @@ import * as moment from 'moment';
 })
 export class ApproveComponent implements OnInit {
   constructor(private leavesService: LeavesService) {}
-  message: string;
+  message: string = '';
   loading: boolean = false;
   leavesToApprove: Array<any> = [];
   baseUrl: string = '';
   ngOnInit(): void {
     this.baseUrl = environment.IMAGE_URL;
+    this.getLeavesToApprove();
+  }
+  getLeavesToApprove(): any {
     this.loading = true;
     this.leavesService
       .getLeavesToApprove()
@@ -33,5 +36,36 @@ export class ApproveComponent implements OnInit {
       .catch((err: any) => {
         this.loading = false;
       });
+  }
+  approve(event: any): any {
+    this.loading = true;
+    this.leavesService
+      .approveLeave(event)
+      .then((res: any) => {
+        this.loading = false;
+        this.message = res.message;
+        this.getLeavesToApprove();
+      })
+      .catch((err: any) => {
+        this.loading = false;
+        this.message = 'Something went wrong please try again later';
+      });
+  }
+  reject(event: any): any {
+    this.loading = true;
+    this.leavesService
+      .rejectLeave(event)
+      .then((res: any) => {
+        this.loading = false;
+        this.message = res.message;
+        this.getLeavesToApprove();
+      })
+      .catch((err: any) => {
+        this.loading = false;
+        this.message = 'Something went wrong please try again later';
+      });
+  }
+  emptyMessages(event: any): void {
+    this.message = event;
   }
 }

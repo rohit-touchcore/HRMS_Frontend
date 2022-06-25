@@ -14,7 +14,7 @@ export class LeavesService {
     },
     {
       path: './approve',
-      name: 'Approve',
+      name: 'Approve/Reject',
     },
   ];
 
@@ -82,6 +82,58 @@ export class LeavesService {
       this.http
         .post(
           `${environment.BASE_URL}user/get-leaves-to-approve`,
+          { userid: user.id },
+          httpOptions
+        )
+        .subscribe(
+          (res) => {
+            resolve(res);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+    });
+  }
+  approveLeave(leaveid: string): any {
+    let user = this.loginService.getUser();
+    let userToken = localStorage.getItem('hrmstoken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userToken}`,
+      }),
+    };
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(
+          `${environment.BASE_URL}leave/approve?leaveid=${leaveid}`,
+          { userid: user.id },
+          httpOptions
+        )
+        .subscribe(
+          (res) => {
+            resolve(res);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+    });
+  }
+  rejectLeave(leaveid: string): any {
+    let user = this.loginService.getUser();
+    let userToken = localStorage.getItem('hrmstoken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userToken}`,
+      }),
+    };
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(
+          `${environment.BASE_URL}leave/reject?leaveid=${leaveid}`,
           { userid: user.id },
           httpOptions
         )

@@ -79,9 +79,9 @@
         <mat-form-field appearance="fill">
           <mat-label>Roles</mat-label>
           <mat-select matNativeControl required formControlName="role">
-            <option *ngFor="let role of roles" [value]="role.value">
+            <mat-option *ngFor="let role of roles" [value]="role.value">
               {{ role.name }}
-            </option>
+            </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="full-width">
