@@ -1,15 +1,27 @@
 export class SideNavOptionsService {
   constructor() {}
-  options: Array<{ icon:string,name: string; path: string }> = [
+  options: Array<any> = [
     {
-      icon:'dashboard',
+      icon: 'dashboard',
       name: 'Dashboard',
       path: './dashboard',
     },
     {
-      icon:'cases',
+      icon: 'cases',
       name: 'Leaves',
       path: './leaves',
+      subModules: [
+        {
+          path: './leaves',
+          name: 'Leaves',
+          icon: 'history',
+        },
+        {
+          path: './approve-or-reject',
+          name: 'Approve/Reject',
+          icon: 'checklist',
+        },
+      ],
     },
   ];
 

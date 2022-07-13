@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LeavesService } from '../leaves.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import * as moment from 'moment';
 import { LoginService } from 'src/app/login/auth.service';
+import { DialogService } from 'src/app/dialog/dialog.service';
+
 @Component({
   selector: 'app-apply-leave',
   templateUrl: './apply.component.html',
@@ -12,7 +14,8 @@ import { LoginService } from 'src/app/login/auth.service';
 export class ApplyComponent implements OnInit {
   constructor(
     private leavesService: LeavesService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private dialogService: DialogService
   ) {}
   managers: any = [];
   selected: '';
@@ -20,17 +23,25 @@ export class ApplyComponent implements OnInit {
   startDate: any;
   endDate: any;
   message: string = '';
+  loading: boolean = false;
+  dialogRef: any;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
+
   ngOnInit(): void {
+    this.loading = true;
+    this.dialogService.dialog.subscribe((data: any) => {
+      this.dialogRef = data;
+    });
     if (!this.managers.length) {
       this.leavesService
         .getAllManagers()
         .then((res: any) => {
           this.managers = res.data;
-          console.log(this.managers);
+          this.loading = false;
         })
         .catch((err: any) => {
           console.log(err);
+          this.loading = false;
         });
     }
   }
@@ -40,16 +51,12 @@ export class ApplyComponent implements OnInit {
         (el) => el.id === event.value._id
       );
       if (index === -1) {
-        // let manager = this.managers.filter((el: any) => el._id === event.value);
         this.selectedManagers.push({
           id: event.value._id,
           name: event.value.firstname + ' ' + event.value.lastname,
         });
-        console.log(this.selectedManagers);
       }
     }
-    console.log(moment(this.startDate).format('DD-MM-YYYY'));
-    console.log(moment(this.endDate).format('DD-MM-YYYY'));
   }
   remove(manager: { name: string; id: string }): void {
     const index = this.selectedManagers.findIndex(
@@ -61,6 +68,7 @@ export class ApplyComponent implements OnInit {
     }
   }
   applyLeave(): void {
+    this.loading = true;
     let user = this.loginService.getUser();
     let managerIds = this.selectedManagers.map((el) => el.id);
     let data = {
@@ -72,12 +80,16 @@ export class ApplyComponent implements OnInit {
     this.leavesService
       .ApplyLeaves(data)
       .then((res: any) => {
-        console.log(res);
-        this.message = res.message
+        this.message = res.message;
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 500);
+        this.loading = false;
       })
       .catch((err: any) => {
         console.log(err);
-        this.message = 'Something went wrong please try again later.'
+        this.message = 'Something went wrong please try again later.';
+        this.loading = false;
       });
   }
   emptyMessages(event: string): void {

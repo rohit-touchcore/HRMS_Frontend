@@ -19,10 +19,17 @@
       class="sideNavContainer"
       *ngFor="let option of sideNavOptionsService.getOptions()"
     >
-      <div [routerLink]="[option.path]" class="sideNavOptionContainer">
+      <div
+        *ngIf="!option.subModules; else elseBlock"
+        [routerLink]="[option.path]"
+        class="sideNavOptionContainer"
+      >
         <mat-icon>{{ option.icon }}</mat-icon>
         <p class="sideNavOption">{{ option.name }}</p>
       </div>
+      <ng-template #elseBlock class="sideNavContainer">
+        <app-expansion [option]="option"></app-expansion>
+      </ng-template>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>

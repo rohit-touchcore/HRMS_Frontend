@@ -1,4 +1,6 @@
+<app-loader *ngIf="loading == true"></app-loader>
 <div class="optionContent">
+  <h2>Apply Leave!</h2>
   <app-snackbar
     *ngIf="message !== ''"
     [action]="''"
@@ -54,9 +56,14 @@
       </mat-form-field>
     </div>
   </div>
-  <div class="button-row">
-    <button mat-raised-button (click)="applyLeave()" color="primary">
-      Apply
-    </button>
+  <div class="buttons">
+    <div class="button-row">
+      <button mat-raised-button (click)="applyLeave()" color="primary">
+        Apply
+      </button>
+    </div>
+    <div class="button-row">
+      <button mat-stroked-button mat-dialog-close color="primary">Close</button>
+    </div>
   </div>
 </div>

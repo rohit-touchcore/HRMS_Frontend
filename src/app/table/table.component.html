@@ -1,0 +1,45 @@
+<table mat-table [dataSource]="dataSource">
+  <ng-container
+    *ngFor="let columns of displayedColumns"
+    [matColumnDef]="columns"
+  >
+    <th mat-header-cell *matHeaderCellDef>{{ columns }}</th>
+    <td mat-cell *matCellDef="let element">
+      <span *ngIf="element[columns] | isArray; else elseBlock">
+        <ng-container *ngFor="let item of element[columns]">
+          <span *ngIf="columns === 'Action'; else notButton">
+            <button
+              class="btn-action"
+              mat-stroked-button
+              *ngIf="item.button === 'stroked'"
+              [color]="item.color"
+              (click)="buttonPressed(element, item)"
+            >
+              {{ item.name }}
+            </button>
+            <button
+              class="btn-action"
+              mat-raised-button
+              *ngIf="item.button === 'raised'"
+              [color]="item.color"
+              (click)="buttonPressed(element, item)"
+            >
+              {{ item.name }}
+            </button>
+          </span>
+          <ng-template #notButton> {{ item }} </ng-template>
+        </ng-container>
+      </span>
+      <ng-template #elseBlock>
+        {{ element[columns] }}
+      </ng-template>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<mat-paginator
+  #paginator
+  [pageSizeOptions]="[5, 10, 15]"
+  showFirstLastButtons
+></mat-paginator>

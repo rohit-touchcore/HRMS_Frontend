@@ -2,6 +2,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginService } from 'src/app/login/auth.service';
 import { environment } from 'src/environments/environment';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class LeavesService {
@@ -13,10 +14,19 @@ export class LeavesService {
       name: 'Apply',
     },
     {
-      path: './approve',
+      path: './approve-or-reject',
       name: 'Approve/Reject',
     },
+    {
+      path: './approved',
+      name: 'Approved Leaves',
+    },
+    {
+      path: './rejected',
+      name: 'Rejected Leaves',
+    },
   ];
+  loadLeaves: Subject<any> = new Subject<any>();
 
   getAllManagers(): any {
     let userToken = localStorage.getItem('hrmstoken');
@@ -95,6 +105,58 @@ export class LeavesService {
         );
     });
   }
+  getApprovedLeaves(): any {
+    let user = this.loginService.getUser();
+    let userToken = localStorage.getItem('hrmstoken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userToken}`,
+      }),
+    };
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(
+          `${environment.BASE_URL}user/get-approved-leaves`,
+          { userid: user.id },
+          httpOptions
+        )
+        .subscribe(
+          (res) => {
+            resolve(res);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+    });
+  }
+  getRejectedLeaves(): any {
+    let user = this.loginService.getUser();
+    let userToken = localStorage.getItem('hrmstoken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userToken}`,
+      }),
+    };
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(
+          `${environment.BASE_URL}user/get-rejected-leaves`,
+          { userid: user.id },
+          httpOptions
+        )
+        .subscribe(
+          (res) => {
+            resolve(res);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+    });
+  }
   approveLeave(leaveid: string): any {
     let user = this.loginService.getUser();
     let userToken = localStorage.getItem('hrmstoken');
@@ -146,5 +208,60 @@ export class LeavesService {
           }
         );
     });
+  }
+  getAllLeaves(): any {
+    let user = this.loginService.getUser();
+    let userToken = localStorage.getItem('hrmstoken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userToken}`,
+      }),
+    };
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(
+          `${environment.BASE_URL}user/get-all-leaves`,
+          { userid: user.id },
+          httpOptions
+        )
+        .subscribe(
+          (res) => {
+            resolve(res);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+    });
+  }
+  cancelLeave(leave: any): any {
+    let user = this.loginService.getUser();
+    let userToken = localStorage.getItem('hrmstoken');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userToken}`,
+      }),
+    };
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(
+          `${environment.BASE_URL}leave/cancel?leaveid=${leave}`,
+          { userid: user.id },
+          httpOptions
+        )
+        .subscribe(
+          (res) => {
+            resolve(res);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
+    });
+  }
+  getLeaveChangeEmitter() {
+    return this.loadLeaves;
   }
 }

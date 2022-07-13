@@ -11,10 +11,11 @@ import { SideNavOptionsService } from './sidenavoptions.service';
 })
 export class SidenavComponent implements OnInit {
   imageUrl: string;
+  panelOpenState: boolean = false;
   constructor(
     public navBar: NavBarService,
     public loginService: LoginService,
-    public sideNavOptionsService:SideNavOptionsService
+    public sideNavOptionsService: SideNavOptionsService
   ) {}
 
   ngOnInit(): void {

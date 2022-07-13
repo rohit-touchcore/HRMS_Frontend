@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeaveheaderComponent } from './leaveheader.component';
+import { ExpansionComponent } from './expansion.component';
 
-describe('LeaveheaderComponent', () => {
-  let component: LeaveheaderComponent;
-  let fixture: ComponentFixture<LeaveheaderComponent>;
+describe('ExpansionComponent', () => {
+  let component: ExpansionComponent;
+  let fixture: ComponentFixture<ExpansionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LeaveheaderComponent ]
+      declarations: [ ExpansionComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LeaveheaderComponent);
+    fixture = TestBed.createComponent(ExpansionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

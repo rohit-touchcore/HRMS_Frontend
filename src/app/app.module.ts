@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { IsArrayPipe } from './helper/is-array.pipe';
+
 import { MaterialModule } from './material.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -18,8 +20,10 @@ import { DashboardComponent } from './sidenav/dashboard/dashboard.component';
 import { LeavesComponent } from './sidenav/leaves/leaves.component';
 import { AttendanceComponent } from './sidenav/attendance/attendance.component';
 import { ApplyComponent } from './sidenav/leaves/apply/apply.component';
-import { LeaveheaderComponent } from './sidenav/leaves/leaveheader/leaveheader.component';
+import { TableComponent } from './table/table.component';
+import { ExpansionComponent } from './expansion/expansion.component';
 import { ApproveComponent } from './sidenav/leaves/approve/approve.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +39,11 @@ import { ApproveComponent } from './sidenav/leaves/approve/approve.component';
     LeavesComponent,
     AttendanceComponent,
     ApplyComponent,
-    LeaveheaderComponent,
+    TableComponent,
+    ExpansionComponent,
     ApproveComponent,
+    IsArrayPipe,
+    DialogComponent
   ],
   imports: [
     BrowserModule,

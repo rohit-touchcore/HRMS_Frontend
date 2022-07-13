@@ -1,0 +1,19 @@
+<mat-accordion>
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header class="sideNavOptionContainer">
+      <mat-panel-title>
+        <mat-icon>cases</mat-icon>
+        <p class="sideNavOption">{{ option.name }}</p>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item class="listItem" *ngFor="let subOption of option.subModules" [routerLink]="subOption.path">
+        <mat-icon>{{ subOption.icon }}</mat-icon>
+        <p class="subModuleName">{{ subOption.name }}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,84 @@
+mat-accordion .mat-expansion-panel:last-of-type {
+  border-radius: 35px;
+  align-items: center;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.mat-expansion-panel-header {
+  height: 2.25rem;
+}
+
+mat-icon {
+  color: black;
+  margin-left: 1px;
+  margin-right: 2px;
+}
+
+.sideNavOptionContainer {
+  display: flex;
+  cursor: pointer !important;
+  align-items: center;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 11px;
+  justify-content: flex-start;
+  overflow: none;
+  margin-left: 0;
+}
+
+.sideNavOption {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0;
+  font-size: large;
+  color: black;
+  text-align: center;
+  font-weight: 500;
+  margin-left: .30rem;
+}
+
+:host ::ng-deep .mat-expansion-panel-body {
+  padding: 0px;
+}
+
+:host ::ng-deep p {
+  margin: 0px;
+}
+
+mat-list {
+  display: flex !important;
+  flex-direction: column !important;
+  padding-top: 0 !important;
+}
+
+:host ::ng-deep .mat-expansion-indicator {
+  transform: rotate(0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep mat-list-item {
+  height: 37px !important;
+  cursor: pointer;
+}
+
+:host ::ng-deep mat-list-item:hover {
+  background-color: #dddcdc;
+}
+
+
+.mat-list-item-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 35px;
+}
+
+.subModuleName {
+  margin-left: 5px;
+}
