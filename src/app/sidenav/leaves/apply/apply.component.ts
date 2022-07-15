@@ -83,8 +83,8 @@ export class ApplyComponent implements OnInit {
         this.message = res.message;
         setTimeout(() => {
           this.dialogRef.close();
-        }, 500);
-        this.loading = false;
+          this.loading = false;
+        }, 200);
       })
       .catch((err: any) => {
         console.log(err);

@@ -1,6 +1,39 @@
 table {
   width: 100%;
 }
-.btn-action{
-  margin: 2px 2px 2px 2px ;
+
+.btn-action {
+  margin: 2px 2px 2px 2px;
+}
+
+.mainContainer {
+  height: 70vh;
+  max-width: 100%;
+  overflow: auto;
+  display: flex;
+}
+
+.tableContainer {
+  width: 100%;
+}
+.closeContainer {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+h2 {
+  margin: 0 5px;
+}
+
+.contentSecondary{
+  background-color: white;
+}
+
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.SideOptions{
+  margin: 5px 5px;
 }

@@ -26,8 +26,18 @@ export class LeavesService {
       name: 'Rejected Leaves',
     },
   ];
+  leaveStatus: any = {
+    0: 'CANCELLED',
+    1: 'APPLIED',
+    2: 'APPROVED',
+    3: 'REJECTED',
+  };
+  // 'CANCELLED', 'APPLIED', 'APPROVED', 'REJECTED'
   loadLeaves: Subject<any> = new Subject<any>();
 
+  getStatus(status: number) {
+    return this.leaveStatus[status];
+  }
   getAllManagers(): any {
     let userToken = localStorage.getItem('hrmstoken');
     const httpOptions = {

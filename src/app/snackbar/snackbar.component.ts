@@ -12,8 +12,8 @@ export class SnackbarComponent implements OnInit {
   @Input() error = '';
   @Input() action = '';
   @Output() messageEmit = new EventEmitter<string>();
-
   snackRef: any;
+
   ngOnInit(): void {
     this.openSnackBar(this.error, this.action);
     this.snackRef.afterDismissed().subscribe(() => {

@@ -1,13 +1,12 @@
 <app-loader *ngIf="loading == true"></app-loader>
 <app-dialog #child></app-dialog>
-
+<app-snackbar
+  *ngIf="message !== ''"
+  [action]="''"
+  [error]="message"
+  (messageEmit)="emptyMessages($event)"
+></app-snackbar>
 <div class="tableContainer">
-  <app-snackbar
-    *ngIf="message !== ''"
-    [action]="''"
-    [error]="message"
-    (messageEmit)="emptyMessages($event)"
-  ></app-snackbar>
   <app-table
     (button)="captureAction($event)"
     [displayedColumns]="columns"

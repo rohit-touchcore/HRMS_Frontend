@@ -1,5 +1,38 @@
-.applyButton{
+.additionalContainer {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.SearchBox {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px;
+  font-size: 12px;
+}
+
+.applyButton {
   display: flex;
   justify-content: flex-end;
   margin: 10px;
+}
+
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding: 0;
+  margin: 0 !important;
+}
+
+mat-form-field {
+  margin-right: .5rem;
 }

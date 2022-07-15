@@ -1,19 +1,21 @@
 <app-loader *ngIf="loading == true"></app-loader>
 <app-dialog #child></app-dialog>
-<div class="applyButton">
-  <app-snackbar
-    *ngIf="message !== ''"
-    [action]="''"
-    [error]="message"
-    (messageEmit)="emptyMessages($event)"
-  ></app-snackbar>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="child.openDialog(Component)"
-  >
-    Apply Leave
-  </button>
+<app-snackbar
+  *ngIf="message !== ''"
+  [action]="''"
+  [error]="message"
+  (messageEmit)="emptyMessages($event)"
+></app-snackbar>
+<div class="additionalContainer">
+  <div class="applyButton">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="child.openDialog(Component)"
+    >
+      Apply Leave
+    </button>
+  </div>
 </div>
 <div class="tableContainer">
   <app-table

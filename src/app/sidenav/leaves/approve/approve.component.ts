@@ -17,23 +17,37 @@ export class ApproveComponent implements OnInit {
 
   loading: boolean = false;
   leaves: Array<any> = [];
+  message: string = '';
+  filters: Array<any>;
   columns: Array<any> = [
     'Applied By',
     'Leave Start',
     'Leave End',
     'Status',
     'Reviewers',
-    'Approved By',
-    'Rejected By',
+    'Last Modified By',
     'Action',
   ];
-  message: string = '';
 
   ngOnInit(): void {
     this.getLeavesToApprove();
   }
+
   getLeavesToApprove(): any {
     this.loading = true;
+    this.filters = [
+      {
+        name: 'Search leaves',
+        type: 'typehead',
+        placeholder: 'Search a leave',
+      },
+      {
+        name: 'Leave Status',
+        type: 'dropdown',
+        options: this.getLeaveStatus(),
+      },
+    ];
+    this.tableService.setFilters(this.filters);
     this.leavesService
       .getLeavesToApprove()
       .then((res: any) => {
@@ -46,80 +60,46 @@ export class ApproveComponent implements OnInit {
         this.loading = false;
       });
   }
+  getLeaveStatus(): any {
+    let statuses = Object.values(this.leavesService.leaveStatus);
+    return statuses;
+  }
   findLeaveStatus(status: number): any {
     let leaveStatus = ['CANCELLED', 'APPLIED', 'APPROVED', 'REJECTED'];
     return leaveStatus[status];
   }
+  getLastModifiedBy(element: any): any {
+    if (element.rejectedBy) {
+      return element.rejectedBy.firstname + ' ' + element.rejectedBy.lastname;
+    } else if (element.approvedBy) {
+      return element.approvedBy.firstname + ' ' + element.approvedBy.lastname;
+    } else {
+      return '-';
+    }
+  }
+  getActions(element: any): any {
+    if (element.leaveStatus === 1) {
+      return [
+        { name: 'Approve', color: 'primary', button: 'raised' },
+        { name: 'Reject', color: 'warn', button: 'raised' },
+      ];
+    }
+  }
   convertData(data: Array<any>): void {
     this.leaves = data.map((element: any) => {
-      if (element.leaveStatus === 0) {
-        return {
-          id: element._id,
-          'Applied By':
-            element.appliedBy.firstname + ' ' + element.appliedBy.lastname,
-          'Leave Start': moment(element.leaveStart).format('DD/MM/YY'),
-          'Leave End': moment(element.leaveEnd).format('DD/MM/YY'),
-          Status: this.findLeaveStatus(element.leaveStatus),
-          Reviewers: element.reviewers.map(
-            (el: any) => el.firstname + ' ' + el.lastname
-          ),
-          'Approved By': '-',
-          'Rejected By': '-',
-          Action: 'NA',
-        };
-      }
-      if (element.hasOwnProperty('approvedBy')) {
-        return {
-          id: element._id,
-          'Applied By':
-            element.appliedBy.firstname + ' ' + element.appliedBy.lastname,
-          'Leave Start': moment(element.leaveStart).format('DD/MM/YY'),
-          'Leave End': moment(element.leaveEnd).format('DD/MM/YY'),
-          Status: this.findLeaveStatus(element.leaveStatus),
-          Reviewers: element.reviewers.map(
-            (el: any) => el.firstname + ' ' + el.lastname
-          ),
-          'Approved By':
-            element.approvedBy.firstname + ' ' + element.approvedBy.lastname,
-          'Rejected By': '-',
-          Action: 'NA',
-        };
-      }
-      if (element.hasOwnProperty('rejectedBy')) {
-        return {
-          id: element._id,
-          'Applied By':
-            element.appliedBy.firstname + ' ' + element.appliedBy.lastname,
-          'Leave Start': moment(element.leaveStart).format('DD/MM/YY'),
-          'Leave End': moment(element.leaveEnd).format('DD/MM/YY'),
-          Status: this.findLeaveStatus(element.leaveStatus),
-          Reviewers: element.reviewers.map(
-            (el: any) => el.firstname + ' ' + el.lastname
-          ),
-          'Approved By': '-',
-          'Rejected By':
-            element.rejectedBy.firstname + ' ' + element.rejectedBy.lastname,
-          Action: 'NA',
-        };
-      } else {
-        return {
-          id: element._id,
-          'Applied By':
-            element.appliedBy.firstname + ' ' + element.appliedBy.lastname,
-          'Leave Start': moment(element.leaveStart).format('DD/MM/YY'),
-          'Leave End': moment(element.leaveEnd).format('DD/MM/YY'),
-          Status: this.findLeaveStatus(element.leaveStatus),
-          Reviewers: element.reviewers.map(
-            (el: any) => el.firstname + ' ' + el.lastname
-          ),
-          'Approved By': '-',
-          'Rejected By': '-',
-          Action: [
-            { name: 'Approve', color: 'primary', button: 'raised' },
-            { name: 'Reject', color: 'warn', button: 'raised' },
-          ],
-        };
-      }
+      return {
+        id: element._id,
+        'Applied By':
+          element.appliedBy.firstname + ' ' + element.appliedBy.lastname,
+        'Leave Start': moment(element.leaveStart).format('DD/MM/YY'),
+        'Leave End': moment(element.leaveEnd).format('DD/MM/YY'),
+        Status: this.findLeaveStatus(element.leaveStatus),
+        Reviewers: element.reviewers.map(
+          (el: any) => el.firstname + ' ' + el.lastname
+        ),
+        'Last Modified By': this.getLastModifiedBy(element),
+        Action: this.getActions(element),
+      };
     });
     this.tableService.fetchLeaves.next(this.leaves);
   }
