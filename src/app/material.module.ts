@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +24,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
 
 const modules = [
   MatDialogModule,
@@ -46,6 +49,8 @@ const modules = [
   MatIconModule,
   MatSidenavModule,
   MatDatepickerModule,
+  BrowserAnimationsModule,
+  CommonModule,
 ];
 
 @NgModule({

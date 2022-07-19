@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavBarService } from '../navbar.service';
-import { LoginService } from '../login/auth.service';
+import { NavBarService } from './navbar.service';
+import { LoginService } from '../Auth/login/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

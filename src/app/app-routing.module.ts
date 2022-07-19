@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { IndexComponent } from './index/index.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './Auth/login/login.component';
+import { SignupComponent } from './Auth/signup/signup.component';
 import { DashboardComponent } from './sidenav/dashboard/dashboard.component';
 import { LeavesComponent } from './sidenav/leaves/leaves.component';
 import { AttendanceComponent } from './sidenav/attendance/attendance.component';

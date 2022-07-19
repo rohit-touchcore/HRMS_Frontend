@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { LeavesService } from './leaves.service';
 import * as moment from 'moment';
 import { ApplyComponent } from './apply/apply.component';
-import { TableService } from 'src/app/table/table.service';
-import { DialogService } from 'src/app/dialog/dialog.service';
+import { TableService } from 'src/app/shared/table/table.service';
+import { DialogService } from 'src/app/shared/dialog/dialog.service';
 @Component({
   selector: 'app-leaves',
   templateUrl: './leaves.component.html',

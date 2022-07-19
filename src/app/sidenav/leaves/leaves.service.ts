@@ -1,6 +1,6 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginService } from 'src/app/login/auth.service';
+import { LoginService } from 'src/app/Auth/login/auth.service';
 import { environment } from 'src/environments/environment';
 import { Subject } from 'rxjs';
 

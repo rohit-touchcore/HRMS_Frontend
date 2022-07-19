@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LeavesService } from '../leaves.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import * as moment from 'moment';
-import { LoginService } from 'src/app/login/auth.service';
-import { DialogService } from 'src/app/dialog/dialog.service';
+import { LoginService } from 'src/app/Auth/login/auth.service';
+import { DialogService } from 'src/app/shared/dialog/dialog.service';
 
 @Component({
   selector: 'app-apply-leave',

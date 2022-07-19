@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { LeavesService } from '../leaves.service';
-import { TableService } from 'src/app/table/table.service';
+import { TableService } from 'src/app/shared/table/table.service';
 
 @Component({
   selector: 'app-approve',
